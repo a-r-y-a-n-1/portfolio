@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>✉️ Contact – Pawfect Pets</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">
+      <span class="logo-icon">🐾</span>
+      <span class="logo-text">Pawfect Pets</span>
+    </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open menu">☰</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">🏠 Home</a></li>
+      <li><a href="accessories.html">🛒 Accessories</a></li>
+      <li><a href="care.html">📺 Care Videos</a></li>
+      <li><a href="contact.html" class="active">✉️ Contact</a></li>
+      <li><a href="#" class="cart-btn" onclick="showCart()">🛒 Cart <span class="cart-badge" id="cart-count">0</span></a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <h1>✉️ Contact & Order</h1>
+    <p>Ready to buy? Send us a message and we'll get back to you within 24 hours!</p>
+  </div>
+
+  <!-- CONTACT SECTION -->
+  <section class="contact-section">
+
+    <!-- CONTACT INFO CARDS (left side) -->
+    <div class="contact-info">
+
+      <div class="info-card">
+        <div class="info-icon">📍</div>
+        <h4>Visit Us</h4>
+        <p>123 Bunny Lane<br>Chennai, India</p>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon">📞</div>
+        
+<p>Mon–Sat: 9am – 6pm</p>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon">📧</div>
+        <h4>Email Us</h4>
+        <!-- mailto: link opens email app -->
+        <p><a href="mailto:hello@pawfectpets.com">hello@pawfectpets.com</a></p>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon">⏰</div>
+        <h4>Opening Hours</h4>
+        <!-- This is an HTML TABLE inside a card -->
+        <table class="hours-table">
+          <tr><td>Mon – Fri</td><td>9am – 6pm</td></tr>
+          <tr><td>Saturday</td><td>10am – 5pm</td></tr>
+          <tr><td>Sunday</td><td>11am – 4pm</td></tr>
+        </table>
+      </div>
+
+    </div>
+
+    <!-- ORDER / CONTACT FORM (right side) -->
+    <!--
+      HTML FORM ELEMENTS DEMO:
+      - <form> tag wraps all form controls
+      - onsubmit: calls JavaScript to validate before sending
+      - Various <input> types: text, email, number, tel, radio, select, textarea, checkbox
+    -->
+    <div class="form-container">
+      <h2>📋 Place an Order or Send a Message</h2>
+
+      <!-- novalidate: we handle validation ourselves in JavaScript -->
+      <form id="contact-form" onsubmit="validateForm(event)" novalidate>
+
+        <!-- ---- SECTION 1: PERSONAL DETAILS ---- -->
+        <div class="form-section-title">👤 Your Details</div>
+
+        <!-- Text input for name -->
+        <div class="form-group">
+          <label for="name">Full Name <span class="required">*</span></label>
+          <input type="text" id="name" name="name" placeholder="Enter name here" />
+          <!-- Error message hidden by default, shown by JavaScript -->
+          <span class="error-msg" id="name-error">Please enter your full name.</span>
+        </div>
+
+        <!-- Email input -->
+        <div class="form-group">
+          <label for="email">Email Address <span class="required">*</span></label>
+          <input type="email" id="email" name="email" placeholder="Enter email here" />
+          <span class="error-msg" id="email-error">Please enter a valid email.</span>
+        </div>
+
+        <!-- Phone number input -->
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" placeholder="Enter Mobile number here" />
+        </div>
+
+        <!-- ---- SECTION 2: YOUR ORDER ---- -->
+        <div class="form-section-title">🛒 Your Order</div>
+
+        <!-- Radio buttons - select ONE option -->
+        <div class="form-group">
+          <label>Enquiry Type <span class="required">*</span></label>
+          <div class="radio-group">
+            <label class="radio-label">
+              <input type="radio" name="enquiry" value="adopt" />
+              🐾 Adopt a Pet
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="enquiry" value="accessory" />
+              🛒 Buy Accessories
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="enquiry" value="question" />
+              ❓ General Question
+            </label>
+          </div>
+          <span class="error-msg" id="enquiry-error">Please select an enquiry type.</span>
+        </div>
+
+        <!-- Dropdown select - choose a pet -->
+        <div class="form-group">
+          <label for="pet-choice">Which pet are you interested in? <span class="required">*</span></label>
+          <select id="pet-choice" name="pet-choice">
+            <option value="">-- Please choose --</option>
+            <optgroup label="🐇 Rabbits">
+              <option value="holland-lop">Holland Lop – ₹4500</option>
+              <option value="mini-rex">Mini Rex – ₹5500</option>
+              <option value="lionhead">Lionhead – ₹6000</option>
+            </optgroup>
+            <optgroup label="🐹 Guinea Pigs">
+              <option value="american-gp">American Guinea Pig – ₹2500</option>
+              <option value="teddy-gp">Teddy Guinea Pig – ₹3500</option>
+            </optgroup>
+            <optgroup label="🐹 Hamsters">
+              <option value="syrian">Syrian Hamster – ₹1500</option>
+            </optgroup>
+            <optgroup label="🐱 Cats">
+              <option value="british-sh">British Shorthair – ₹1200</option>
+              <option value="ragdoll">Ragdoll – ₹9500 </option>
+            </optgroup>
+            <option value="accessory-only">Accessories only</option>
+          </select>
+          <span class="error-msg" id="pet-error">Please select a pet or 'Accessories only'.</span>
+        </div>
+
+        <!-- Number input -->
+        <div class="form-group">
+          <label for="quantity">Quantity <span class="required">*</span></label>
+          <!-- min/max set the allowed range -->
+          <input type="number" id="quantity" name="quantity" min="1" max="5" value="1" />
+          <span class="error-msg" id="qty-error">Quantity must be between 1 and 5.</span>
+        </div>
+
+        <!-- Textarea - multiline text input -->
+        <div class="form-group">
+          <label for="message">Your Message or Questions</label>
+          <textarea id="message" name="message" rows="4"
+            placeholder="Any questions? Tell us about your home setup, experience, etc."></textarea>
+        </div>
+
+        <!-- Checkbox - must be ticked to submit -->
+        <div class="form-group checkbox-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="agree" name="agree" />
+            I agree to the <a href="#">Terms & Conditions</a> and confirm I am over 18.
+          </label>
+          <span class="error-msg" id="agree-error">You must agree to the terms.</span>
+        </div>
+
+        <!-- Submit button - animated with CSS -->
+        <button type="submit" class="btn-primary btn-submit">
+          Send My Order 🐾
+        </button>
+
+      </form>
+
+      <!-- Success message - hidden until form is submitted -->
+      <div class="success-message" id="success-msg" style="display:none;">
+        <div class="success-icon">🎉</div>
+        <h3>Thank you! We'll be in touch soon.</h3>
+        <p>We'll reply within 24 hours to confirm your order.</p>
+        <button class="btn-primary" onclick="resetForm()">Send Another Message</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CART POPUP -->
+  <div class="cart-popup" id="cart-popup">
+    <div class="cart-header">
+      <h3>🛒 Your Cart</h3>
+      <button onclick="hideCart()">✕</button>
+    </div>
+    <ul id="cart-items-list"></ul>
+    <div class="cart-total">Total: ₹<span id="cart-total">0</span></div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <h4>🐾 Pawfect Pets</h4>
+        <p>Bringing you the cutest pets since 1875!</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="accessories.html">Accessories</a></li>
+          <li><a href="care.html">Care Videos</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>📍 Visit Us</h4>
+        <p>123 Bunny Lane<br>Chennai, India</p>
+      </div>
+    </div>
+    <p class="footer-copy">© 2026 Pawfect Pets – Made with 💜 for animal lovers</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>📺 Care Videos – Pawfect Pets</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">
+      <span class="logo-icon">🐾</span>
+      <span class="logo-text">Pawfect Pets</span>
+    </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open menu">☰</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">🏠 Home</a></li>
+      <li><a href="accessories.html">🛒 Accessories</a></li>
+      <li><a href="care.html" class="active">📺 Care Videos</a></li>
+      <li><a href="contact.html">✉️ Contact</a></li>
+      <li><a href="#" class="cart-btn" onclick="showCart()">🛒 Cart <span class="cart-badge" id="cart-count">0</span></a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <h1>📺 Pet Care Videos</h1>
+    <p>Learn how to give your new pet the best life possible!</p>
+  </div>
+
+  <!-- VIDEO TABS -->
+  <section class="filter-bar">
+    <div class="filters">
+      <button class="filter-btn active" onclick="showVideos('all', this)">All Pets</button>
+      <button class="filter-btn" onclick="showVideos('rabbit', this)">🐇 Rabbits</button>
+      <button class="filter-btn" onclick="showVideos('guinea', this)">🐹 Guinea Pigs</button>
+      <button class="filter-btn" onclick="showVideos('hamster', this)">🐹 Hamsters</button>
+      <button class="filter-btn" onclick="showVideos('cat', this)">🐱 Cats</button>
+    </div>
+  </section>
+
+  <!-- VIDEO CARDS GRID -->
+  <!-- Each card contains an embedded YouTube video using <iframe> -->
+  <section class="video-grid" id="video-container">
+
+    <!-- ============================================================
+         EMBEDDED VIDEO using <iframe> HTML tag
+         - src: the YouTube embed URL
+         - allow: permissions the video player needs
+         - allowfullscreen: lets viewers go fullscreen
+    ============================================================ -->
+
+    <!-- RABBIT VIDEO 1 -->
+    <div class="video-card" data-type="rabbit">
+      <div class="video-wrapper">
+        <!-- Embedded YouTube video - this is an <iframe> element -->
+        <iframe
+          src="https://www.youtube.com/embed/4cAFXMZVBos"
+          title="How to care for a rabbit"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <div class="video-info">
+        <h3>🐇 Rabbit Basics for Beginners</h3>
+        <p>Everything you need to know before getting your first rabbit. Diet, housing, and handling tips!</p>
+        <span class="video-tag">Rabbit Care</span>
+      </div>
+    </div>
+
+    <!-- RABBIT VIDEO 2 -->
+    <div class="video-card" data-type="rabbit">
+      <div class="video-wrapper">
+        <iframe
+          src="https://www.youtube.com/embed/EfHQwPNVoN4"
+          title="Rabbit diet guide"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <div class="video-info">
+        <h3>🥬 What Do Rabbits Eat?</h3>
+        <p>Learn what hay, veggies, and pellets to feed your bunny for a long and healthy life.</p>
+        <span class="video-tag">Rabbit Diet</span>
+      </div>
+    </div>
+
+    <!-- GUINEA PIG VIDEO -->
+    <div class="video-card" data-type="guinea">
+      <div class="video-wrapper">
+        <iframe
+          src="https://www.youtube.com/embed/5jxNS4enXqY"
+          title="Guinea pig care guide"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <div class="video-info">
+        <h3>🐹 Guinea Pig Care Guide</h3>
+        <p>Everything a new guinea pig owner needs – housing, diet, social needs, and health tips.</p>
+        <span class="video-tag">Guinea Pig Care</span>
+      </div>
+    </div>
+
+    <!-- HAMSTER VIDEO -->
+    <div class="video-card" data-type="hamster">
+      <div class="video-wrapper">
+        <iframe
+          src="https://www.youtube.com/embed/oCFJVSGEuGs"
+          title="Hamster care for beginners"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <div class="video-info">
+        <h3>🌙 Hamster Care for Beginners</h3>
+        <p>Set up the perfect hamster cage, learn about their diet, and understand their nocturnal lifestyle.</p>
+        <span class="video-tag">Hamster Care</span>
+      </div>
+    </div>
+
+    <!-- CAT VIDEO -->
+    <div class="video-card" data-type="cat">
+      <div class="video-wrapper">
+        <iframe
+          src="https://www.youtube.com/embed/rLqKD0q-YEQ"
+          title="Cat care basics"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <div class="video-info">
+        <h3>🐱 Cat Care Basics</h3>
+        <p>How to look after your new cat – feeding, grooming, playtime, and keeping them happy indoors.</p>
+        <span class="video-tag">Cat Care</span>
+      </div>
+    </div>
+
+    <!-- GENERAL PET TIPS -->
+    <div class="video-card" data-type="all">
+      <div class="video-wrapper">
+        <iframe
+          src="https://www.youtube.com/embed/Jkg-V7g_dOQ"
+          title="First pet tips"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <div class="video-info">
+        <h3>⭐ Tips for First-Time Pet Owners</h3>
+        <p>General advice that applies to all small pets – vet visits, bonding with your pet, and setting up a safe home.</p>
+        <span class="video-tag">General Tips</span>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- QUICK TIPS BOX -->
+  <section class="tips-section">
+    <h2 class="section-title">📋 Quick Care Tips</h2>
+    <div class="tips-grid">
+
+      <div class="tip-card">
+        <div class="tip-icon">🌾</div>
+        <h4>Hay Every Day</h4>
+        <p>Rabbits and guinea pigs need unlimited hay – it keeps their digestive system healthy and wears down their teeth.</p>
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-icon">💧</div>
+        <h4>Fresh Water</h4>
+        <p>Always provide clean, fresh water. Change it every day and clean the bottle or bowl regularly.</p>
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-icon">🏠</div>
+        <h4>Safe Space</h4>
+        <p>Every pet needs a safe, quiet space to retreat to when they feel scared or overwhelmed.</p>
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-icon">🤝</div>
+        <h4>Go Slowly</h4>
+        <p>When you first get a pet, let them settle in for a few days before handling. Let them come to you!</p>
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-icon">🩺</div>
+        <h4>Vet Visits</h4>
+        <p>Book a vet check-up within the first week. Annual check-ups keep your pet healthy long-term.</p>
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-icon">🎾</div>
+        <h4>Play Time</h4>
+        <p>All pets need mental stimulation! Toys, tunnels, and supervised exploration keep them happy.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CART POPUP -->
+  <div class="cart-popup" id="cart-popup">
+    <div class="cart-header">
+      <h3>🛒 Your Cart</h3>
+      <button onclick="hideCart()">✕</button>
+    </div>
+    <ul id="cart-items-list"></ul>
+    <div class="cart-total">Total: £<span id="cart-total">0</span></div>
+    <a href="contact.html" class="btn-primary" style="display:block;text-align:center;margin-top:10px;">Checkout ➡️</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <h4>🐾 Pawfect Pets</h4>
+        <p>Bringing you the cutest pets since 2024!</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="accessories.html">Accessories</a></li>
+          <li><a href="care.html">Care Videos</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>📍 Visit Us</h4>
+        <p>123 Bunny Lane<br>London, UK</p>
+      </div>
+    </div>
+    <p class="footer-copy">© 2025 Pawfect Pets – Made with 💜 for animal lovers</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

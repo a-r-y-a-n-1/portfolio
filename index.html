@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🐾 Pawfect Pets – Your Cute Pet Shop</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="style.css" />
+</head> 
+
+<body>
+
+  <nav class="navbar" id="navbar">
+
+    <!-- Logo area (text + emoji) -->
+    <div class="nav-logo">
+      <span class="logo-icon">🐾</span>
+      <span class="logo-text">Pawfect Pets</span>
+    </div>
+
+    <!-- Hamburger button (shows on mobile) -->
+    <!-- onclick calls JavaScript function toggleMenu() -->
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open menu">
+      ☰
+    </button>
+
+
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html" class="active">🏠 Home</a></li>
+      <li><a href="accessories.html">🛒 Accessories</a></li>
+      <li><a href="care.html">📺 How to Care Videos</a></li>
+      <li><a href="contact.html">✉️ Contact</a></li>
+      <!-- Cart counter - JavaScript updates the number inside the badge -->
+      <li>
+        <a href="#" class="cart-btn" onclick="showCart()">
+          🛒 Cart <span class="cart-badge" id="cart-count">0</span>
+        </a>
+      </li>
+      <li><a href="#" onclick="logout()">🚪 Logout</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-content">
+      <svg class="hero-svg" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg" aria-label="Cute bunny illustration">
+        <!-- Bunny body -->
+        <ellipse cx="60" cy="55" rx="22" ry="18" fill="#fff" />
+        <!-- Bunny head -->
+        <circle cx="60" cy="34" r="14" fill="#fff" />
+        <!-- Left ear -->
+        <ellipse cx="52" cy="16" rx="5" ry="11" fill="#fff" />
+        <ellipse cx="52" cy="16" rx="3" ry="8" fill="#ffb6c1" />
+        <!-- Right ear -->
+        <ellipse cx="68" cy="16" rx="5" ry="11" fill="#fff" />
+        <ellipse cx="68" cy="16" rx="3" ry="8" fill="#ffb6c1" />
+        <!-- Eyes -->
+        <circle cx="55" cy="32" r="2.5" fill="#7c5cbb" />
+        <circle cx="65" cy="32" r="2.5" fill="#7c5cbb" />
+        <!-- Shine dots in eyes -->
+        <circle cx="56" cy="31" r="0.8" fill="white" />
+        <circle cx="66" cy="31" r="0.8" fill="white" />
+        <!-- Nose -->
+        <ellipse cx="60" cy="37" rx="2" ry="1.2" fill="#ffb6c1" />
+        <!-- Smile -->
+        <path d="M57 39 Q60 42 63 39" stroke="#aaa" stroke-width="1" fill="none" stroke-linecap="round" />
+        <!-- Whiskers -->
+        <line x1="44" y1="37" x2="55" y2="38" stroke="#ccc" stroke-width="0.8" />
+        <line x1="44" y1="39" x2="55" y2="39" stroke="#ccc" stroke-width="0.8" />
+        <line x1="65" y1="38" x2="76" y2="37" stroke="#ccc" stroke-width="0.8" />
+        <line x1="65" y1="39" x2="76" y2="39" stroke="#ccc" stroke-width="0.8" />
+        <!-- Paws -->
+        <ellipse cx="46" cy="64" rx="7" ry="5" fill="#fff" />
+        <ellipse cx="74" cy="64" rx="7" ry="5" fill="#fff" />
+        <!-- Tummy spot -->
+        <ellipse cx="60" cy="57" rx="10" ry="8" fill="#fff5f8" />
+        <!-- Stars decoration -->
+        <text x="10" y="20" font-size="8" fill="#b39ddb">✦</text>
+        <text x="95" y="15" font-size="6" fill="#f48fb1">✦</text>
+        <text x="100" y="50" font-size="5" fill="#b39ddb">✦</text>
+        <text x="5" y="55" font-size="7" fill="#f48fb1">✦</text>
+      </svg>
+
+      <h1 class="hero-title">Welcome to Pawfect Pets! 🐇</h1>
+      <p class="hero-subtitle">Find your fluffy best friend – bunnies, guinea pigs, hamsters & more!</p>
+
+      <a href="#shop" class="btn-primary">Shop Pets 🐾</a>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       FILTER BAR
+       - JavaScript uses these buttons to show/hide pet cards
+  ============================================================ -->
+  <section class="filter-bar" id="shop">
+    <h2 class="section-title">Our Pets 🐾</h2>
+    <p class="section-subtitle">Click a pet card to learn more about them!</p>
+
+    <div class="filters">
+      
+      <button class="filter-btn active" data-filter="all" onclick="filterPets('all', this)">All Pets</button>
+      <button class="filter-btn" data-filter="bunny" onclick="filterPets('bunny', this)">🐇 Bunnies</button>
+      <button class="filter-btn" data-filter="guinea-pig" onclick="filterPets('guinea-pig', this)">🐹 Guinea Pigs</button>
+      <button class="filter-btn" data-filter="hamster" onclick="filterPets('hamster', this)">🐹 Hamsters</button>
+      <button class="filter-btn" data-filter="cat" onclick="filterPets('cat', this)">🐱 Cats</button>
+    </div>
+
+    <!-- Price sort dropdown -->
+    <div class="sort-bar">
+      <label for="sort-price">Sort by price:</label>
+      <select id="sort-price" onchange="sortByPrice(this.value)">
+        <option value="default">Default</option>
+        <option value="low">Price: Low → High</option>
+        <option value="high">Price: High → Low</option>
+      </select>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PET CARDS GRID
+       - Each card has class="pet-card" and a data-type attribute
+       - JavaScript uses these to filter
+  ============================================================ -->
+  <section class="pets-grid" id="pets-container">
+
+    <!-- ---- PET CARD ---- -->
+    <!-- data-type: used by filter; data-price: used by sort -->
+    <!-- onclick: calls JavaScript to open detail popup -->
+    <div class="pet-card" data-type="bunny" data-price="4500"
+         onclick="openPetDetail('Holland Lop', '🐇', 'bunny', '₹4500', 'Small', 'Calm & Gentle',
+           'Holland Lops are one of the most popular rabbit breeds. They have adorable floppy ears and a very round face.',
+           'Loves cuddles, calm indoors, enjoys exploring. Very social – needs a friend!',
+           'Daily hay, fresh veggies, water. Weekly cage clean. Brush fur twice a week.',
+           'Easy – great for first-time owners!')">
+
+      <!-- Hover overlay - shown with CSS on hover -->
+      <div class="card-hover-info">🐇 Calm & loves cuddles!</div>
+
+      <!-- Pet emoji as the "image" (no file needed) -->
+      <div class="pet-emoji">🐇</div>
+
+      <div class="pet-info">
+        <h3 class="pet-name">Holland Lop</h3>
+        <p class="pet-breed">Breed: Holland Lop</p>
+        <p class="pet-price">₹4500</p>
+        <button class="btn-add" onclick="event.stopPropagation(); addToCart('Holland Lop', 45)">
+          Add to Cart 🛒
+        </button>
+      </div>
+    </div>
+
+    <!-- ---- BUNNY 2 ---- -->
+    <div class="pet-card" data-type="bunny" data-price="5500"
+         onclick="openPetDetail('Mini Rex', '🐇', 'bunny', '₹5500', 'Small', 'Playful & Curious',
+           'Mini Rex rabbits have incredibly soft, velvety fur. They are lively and love to explore.',
+           'Active and playful, loves to binky (jump for joy!). Needs space to run.',
+           'Daily hay and greens. Keep cage clean. Velvet fur needs minimal brushing.',
+           'Moderate – needs daily exercise time outside the cage.')">
+      <div class="card-hover-info">🐇 Super soft velvety fur!</div>
+      <div class="pet-emoji">🐇</div>
+      <div class="pet-info">
+        <h3 class="pet-name">Mini Rex</h3>
+        <p class="pet-breed">Breed: Mini Rex</p>
+        <p class="pet-price">₹5500</p>
+        <button class="btn-add" onclick="event.stopPropagation(); addToCart('Mini Rex', 55)">Add to Cart 🛒</button>
+      </div>
+    </div>
+
+    <!-- ---- BUNNY 3 ---- -->
+    <div class="pet-card" data-type="bunny" data-price="6000"
+         onclick="openPetDetail('Lionhead', '🐇', 'bunny', '₹6000', 'Small', 'Bold & Friendly',
+           'Lionheads have a fluffy mane of fur around their heads, like a tiny lion! They are bold and very affectionate.',
+           'Confident, loves attention, can be cheeky! Enjoys toys and puzzles.',
+           'Daily hay. Brush mane 3x per week to avoid matting. Fresh water always.',
+           'Moderate – requires regular grooming.')">
+      <div class="card-hover-info">🦁 Fluffy like a little lion!</div>
+      <div class="pet-emoji">🐇</div>
+      <div class="pet-info">
+        <h3 class="pet-name">Lionhead</h3>
+        <p class="pet-breed">Breed: Lionhead</p>
+        <p class="pet-price">₹6000</p>
+        <button class="btn-add" onclick="event.stopPropagation(); addToCart('Lionhead', 60)">Add to Cart 🛒</button>
+      </div>
+    </div>
+
+    <!-- ---- GUINEA PIG 1 ---- -->
+    <div class="pet-card" data-type="guinea-pig" data-price="2500"
+         onclick="openPetDetail('American Guinea Pig', '🐹', 'guinea-pig', '₹2500', 'Medium', 'Social & Vocal',
+           'The American Guinea Pig is the most common breed. Short smooth coat, very easy to care for.',
+           'Very social! Loves to squeak and chatter. Always keep in pairs – they get lonely.',
+           'Hay daily, vitamin C veggies, fresh water. Clean cage weekly.',
+           'Easy – perfect for children!')">
+      <div class="card-hover-info">🐹 Loves to chat & squeak!</div>
+      <div class="pet-emoji">🐹</div>
+      <div class="pet-info">
+        <h3 class="pet-name">American Guinea Pig</h3>
+        <p class="pet-breed">Breed: American</p>
+        <p class="pet-price">₹2500</p>
+        <button class="btn-add" onclick="event.stopPropagation(); addToCart('Guinea Pig', 25)">Add to Cart 🛒</button>
+      </div>
+    </div>
+
+    <!-- ---- GUINEA PIG 2 ---- -->
+    <div class="pet-card" data-type="guinea-pig" data-price="3500"
+         onclick="openPetDetail('Teddy Guinea Pig', '🐹', 'guinea-pig', '₹3500', 'Medium', 'Fluffy & Sweet',
+           'Teddy guinea pigs have a dense, rough, springy coat – just like a teddy bear! Very cuddly.',
+           'Calm and sweet-natured. Loves being held. Gentle with children.',
+           'Hay, fresh greens, vitamin C. Brush coat weekly. Nail trims needed.',
+           'Easy to moderate.')">
+      <div class="card-hover-info">🧸 Soft like a teddy bear!</div>
+      <div class="pet-emoji">🐹</div>
+      <div class="pet-info">
+        <h3 class="pet-name">Teddy Guinea Pig</h3>
+        <p class="pet-breed">Breed: Teddy</p>
+        <p class="pet-price">₹3500</p>
+        <button class="btn-add" onclick="event.stopPropagation(); addToCart('Teddy Guinea Pig', 35)">Add to Cart 🛒</button>
+      </div>
+    </div>
+
+    <!-- ---- HAMSTER ---- -->
+    <div class="pet-card" data-type="hamster" data-price="1500"
+         onclick="openPetDetail('Syrian Hamster', '🐹', 'hamster', '₹1500', 'Small', 'Independent & Curious',
+           'Syrian hamsters are the biggest hamster species. They are golden-coloured and love to explore.',
+           'Active at night (nocturnal). Loves running on a wheel. Prefers to live alone.',
+           'Seed mix, fresh veggies, water bottle. Clean cage weekly. Provide a large wheel.',
+           'Easy – great starter pet!')">
+      <div class="card-hover-info">🌙 Active at night – night owl!</div>
+      <div class="pet-emoji">🐹</div>
+      <div class="pet-info">
+        <h3 class="pet-name">Syrian Hamster</h3>
+        <p class="pet-breed">Breed: Syrian</p>
+        <p class="pet-price">₹1500</p>
+        <button class="btn-add" onclick="event.stopPropagation(); addToCart('Syrian Hamster', 15)">Add to Cart 🛒</button>
+      </div>
+    </div>
+
+    <!-- ---- CAT ---- -->
+    <div class="pet-card" data-type="cat" data-price="1200"
+         onclick="openPetDetail('British Shorthair', '🐱', 'cat', '₹1200', 'Medium-Large', 'Calm & Cuddly',
+           'The British Shorthair is a chunky, round-faced cat with a very dense plush coat. Calm and easygoing.',
+           'Laid-back, loves naps, enjoys cuddles on its own terms. Good with kids and other pets.',
+           'High-quality cat food, fresh water. Brush weekly. Vet check-ups yearly.',
+           'Easy – very independent and low-maintenance.')">
+      <div class="card-hover-info">😺 Chubby & super chill cat!</div>
+      <div class="pet-emoji">🐱</div>
+      <div class="pet-info">
+        <h3 class="pet-name">British Shorthair</h3>
+        <p class="pet-breed">Breed: British Shorthair</p>
+        <p class="pet-price">₹1200</p>
+        <button class="btn-add" onclick="event.stopPropagation(); addToCart('British Shorthair', 120)">Add to Cart 🛒</button>
+      </div>
+    </div>
+
+    <!-- ---- CAT 2 ---- -->
+    <div class="pet-card" data-type="cat" data-price="9500"
+         onclick="openPetDetail('Ragdoll', '🐱', 'cat', '₹9500', 'Large', 'Floppy & Gentle',
+           'Ragdolls go limp when picked up – hence the name! They are large, blue-eyed, and incredibly gentle.',
+           'Dog-like loyalty, follows you around the house. Very gentle, loves to be held.',
+           'Premium food, daily brushing (long coat). Lots of love and attention!',
+           'Easy – very gentle and forgiving.')">
+      <div class="card-hover-info">💙 Goes floppy when cuddled!</div>
+      <div class="pet-emoji">🐱</div>
+      <div class="pet-info">
+        <h3 class="pet-name">Ragdoll</h3>
+        <p class="pet-breed">Breed: Ragdoll</p>
+        <p class="pet-price">₹9500</p>
+        <button class="btn-add" onclick="event.stopPropagation(); addToCart('Ragdoll', 9500)">Add to Cart 🛒</button>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============================================================
+       BREED COMPARISON TABLE
+       - Demonstrates HTML <table> tag
+       - Shows traits for each breed
+  ============================================================ -->
+  <section class="table-section">
+    <h2 class="section-title">🔍 Breed Comparison</h2>
+    <p class="section-subtitle">Compare pets to find the best match for you!</p>
+
+    <!-- overflow-x makes table scroll on small screens -->
+    <div class="table-wrapper">
+      <table class="breed-table">
+        <!-- Table head - column labels -->
+        <thead>
+          <tr>
+            <th>🐾 Pet</th>
+            <th>📏 Size</th>
+            <th>😊 Temperament</th>
+            <th>✂️ Grooming</th>
+            <th>👶 Kid Friendly</th>
+            <th>💰 Price</th>
+            <th>⭐ Beginner?</th>
+          </tr>
+        </thead>
+
+        <!-- Table body - one row per breed -->
+        <tbody>
+          <tr>
+            <td>🐇 Holland Lop</td>
+            <td>Small</td>
+            <td>Calm, Gentle</td>
+            <td>Low</td>
+            <td>✅ Yes</td>
+            <td></td>
+            <td>✅ Great!</td>
+          </tr>
+          <tr>
+            <td>🐇 Mini Rex</td>
+            <td>Small</td>
+            <td>Playful, Active</td>
+            <td>Low</td>
+            <td>✅ Yes</td>
+            <td>₹2000</td>
+            <td>✅ Good</td>
+          </tr>
+          <tr>
+            <td>🐇 Lionhead</td>
+            <td>Small</td>
+            <td>Bold, Friendly</td>
+            <td>Medium</td>
+            <td>✅ Yes</td>
+            <td>₹1800</td>
+            <td>⚠️ Some grooming</td>
+          </tr>
+          <tr>
+            <td>🐹 American Guinea Pig</td>
+            <td>Medium</td>
+            <td>Social, Vocal</td>
+            <td>Low</td>
+            <td>✅ Yes</td>
+            <td>₹800</td>
+            <td>✅ Great!</td>
+          </tr>
+          <tr>
+            <td>🐹 Teddy Guinea Pig</td>
+            <td>Medium</td>
+            <td>Calm, Sweet</td>
+            <td>Low</td>
+            <td>✅ Yes</td>
+            <td>₹2100</td>
+            <td>✅ Great!</td>
+          </tr>
+          <tr>
+            <td>🐹 Syrian Hamster</td>
+            <td>Small</td>
+            <td>Independent</td>
+            <td>Low</td>
+            <td>⚠️ Careful</td>
+            <td>₹1000</td>
+            <td>✅ Good</td>
+          </tr>
+          <tr>
+            <td>🐱 British Shorthair</td>
+            <td>Medium-Large</td>
+            <td>Calm, Cuddly</td>
+            <td>Low</td>
+            <td>✅ Yes</td>
+            <td>₹3800</td>
+            <td>✅ Great!</td>
+          </tr>
+          <tr>
+            <td>🐱 Ragdoll</td>
+            <td>Large</td>
+            <td>Gentle, Loving</td>
+            <td>Medium</td>
+            <td>✅ Yes</td>
+            <td>₹3400</td>
+            <td>✅ Great!</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PET DETAIL MODAL (POPUP)
+       - Hidden by default (display:none in CSS)
+       - JavaScript fills in the content and shows it
+  ============================================================ -->
+  <div class="modal-overlay" id="pet-modal" onclick="closeModal(event)">
+    <div class="modal-box">
+
+      <!-- Close button (X) -->
+      <button class="modal-close" onclick="closeModal()">✕</button>
+
+      <!-- These empty elements get filled by JavaScript -->
+      <div class="modal-emoji" id="modal-emoji">🐇</div>
+      <h2 id="modal-name">Pet Name</h2>
+      <p id="modal-breed-tag" class="modal-tag">🐇 Bunny</p>
+
+      <!-- Info grid inside the popup -->
+      <div class="modal-grid">
+        <div class="modal-stat">
+          <strong>📏 Size</strong>
+          <span id="modal-size">-</span>
+        </div>
+        <div class="modal-stat">
+          <strong>😊 Behaviour</strong>
+          <span id="modal-behaviour">-</span>
+        </div>
+        <div class="modal-stat">
+          <strong>💰 Price</strong>
+          <span id="modal-price">-</span>
+        </div>
+      </div>
+
+      <div class="modal-section">
+        <h4>📖 About</h4>
+        <p id="modal-about">-</p>
+      </div>
+
+      <div class="modal-section">
+        <h4>🎭 Personality</h4>
+        <p id="modal-personality">-</p>
+      </div>
+
+      <div class="modal-section">
+        <h4>🌿 Care Requirements</h4>
+        <p id="modal-care">-</p>
+      </div>
+
+      <div class="modal-section">
+        <h4>⭐ Difficulty</h4>
+        <p id="modal-difficulty">-</p>
+      </div>
+
+      <button class="btn-primary" id="modal-add-btn">Add to Cart 🛒</button>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       CART POPUP (mini cart)
+  ============================================================ -->
+  <div class="cart-popup" id="cart-popup">
+    <div class="cart-header">
+      <h3>🛒 Your Cart</h3>
+      <button onclick="hideCart()">✕</button>
+    </div>
+    <ul id="cart-items-list">
+      <!-- JavaScript adds list items here -->
+    </ul>
+    <div class="cart-total">
+      Total: £<span id="cart-total">0</span>
+    </div>
+    <a href="contact.html" class="btn-primary" style="display:block;text-align:center;margin-top:10px;">
+      Checkout ➡️
+    </a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div style="color: black;">
+        <h4>🐾 Pawfect Pets</h4>
+        <p>Bringing you the cutest pets since 2012!</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="accessories.html">Accessories</a></li>
+          <li><a href="care.html">Care Videos</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>📍 Visit Us</h4>
+        <p>123 Bunny Lane<br>Chennai, India</p>
+      </div>
+    </div>
+    <p class="footer-copy">© 2026 Pawfect Pets – Made with 💜 for animal lovers</p>
+  </footer>
+  <script src="script.js"></script>
+
+<script>
+
+if(localStorage.getItem("loggedIn")!="true"){
+window.location.href="login.html";
+}
+
+function logout(){
+
+localStorage.removeItem("loggedIn");
+
+alert("Logged Out Successfully");
+
+window.location.href="login.html";
+
+}
+
+</script>
+
+</body>
+</html>

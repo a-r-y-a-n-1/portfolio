@@ -1,0 +1,1216 @@
+/* ================================================================
+
+   
+   TABLE OF CONTENTS:
+   1.  CSS Variables (custom colours/sizes stored as names)
+   2.  Reset & Base Styles
+   3.  Navigation Bar
+   4.  Hero Section
+   5.  Filter/Sort Bar
+   6.  Pet Cards Grid
+   7.  Breed Comparison Table
+   8.  Pet Detail Modal (popup)
+   9.  Cart Popup
+   10. Accessories Page
+   11. Video Cards (Care page)
+   12. Tips Section (Care page)
+   13. Contact Form Page
+   14. Footer
+   15. Utility Classes
+   16. Animations (keyframes)
+   17. Responsive (mobile) overrides
+================================================================ */
+
+
+/* ----------------------------------------------------------------
+   1. CSS VARIABLES
+   - Defined on :root so they work everywhere on the page
+   - Use var(--name) to reuse them
+---------------------------------------------------------------- */
+:root {
+  --periwinkle:   #CCCCFF;   /* main background colour */
+  --lavender:     #b8b8ff;   /* slightly deeper periwinkle */
+  --purple:       #7c5cbb;   /* buttons, accents */
+  --purple-dark:  #5a3d99;   /* hover state on buttons */
+  --pink:         #ffb6c1;   /* ear pink, accents */
+  --white:        #ffffff;
+  --soft-white:   #fafaf8;
+  --text-dark:    #3a3357;   /* main body text */
+  --text-mid:     #6b5c8a;   /* secondary text */
+  --card-shadow:  0 4px 18px rgba(124, 92, 187, 0.15);
+  --radius:       18px;       /* rounded corners */
+  --radius-sm:    10px;
+  --transition:   0.3s ease;  /* animation speed */
+}
+
+
+/* ----------------------------------------------------------------
+   2. RESET & BASE STYLES
+   Remove browser default margins, set font
+---------------------------------------------------------------- */
+* {
+  /* box-sizing: border-box means padding is included in width */
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  /* font-family: try fonts in order, fall back to sans-serif */
+  font-family: 'Quicksand', 'Nunito', sans-serif;
+  background-color: var(--periwinkle);  /* main background */
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+/* All links: remove underline by default */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Image responsiveness: never overflow container */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Remove bullet points from unordered lists */
+ul {
+  list-style: none;
+}
+
+
+/* ----------------------------------------------------------------
+   3. NAVIGATION BAR
+   - position: sticky keeps it at top when scrolling
+   - display: flex arranges items in a row
+---------------------------------------------------------------- */
+.navbar {
+  position: sticky;     /* sticks to top of screen */
+  top: 0;
+  z-index: 1000;        /* appears above everything else */
+  display: flex;
+  align-items: center;  /* vertical center */
+  justify-content: space-between;  /* logo left, links right */
+  padding: 14px 30px;
+  background: rgba(255, 255, 255, 0.85);  /* semi-transparent white */
+  backdrop-filter: blur(10px);            /* frosted glass effect */
+  box-shadow: 0 2px 12px rgba(124, 92, 187, 0.12);
+}
+
+/* Logo area */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 1.3rem;
+  color: var(--purple);
+}
+
+.logo-icon {
+  font-size: 1.8rem;
+  /* CSS animation: wobble defined in keyframes below */
+  animation: wobble 3s infinite ease-in-out;
+}
+
+/* Navigation links list */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+/* Each link */
+.nav-links li a {
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-mid);
+  /* CSS transition: smoothly animate colour change */
+  transition: background var(--transition), color var(--transition);
+}
+
+/* Hover state: changes background */
+.nav-links li a:hover,
+.nav-links li a.active {
+  background: var(--periwinkle);
+  color: var(--purple);
+}
+
+/* Cart button styling */
+.cart-btn {
+  background: var(--purple) !important;
+  color: white !important;
+  padding: 8px 16px !important;
+  border-radius: 20px !important;
+}
+.cart-btn:hover {
+  background: var(--purple-dark) !important;
+}
+
+/* Small red badge showing number of items in cart */
+.cart-badge {
+  background: #ff4d6d;
+  color: white;
+  border-radius: 50%;
+  font-size: 0.7rem;
+  padding: 1px 6px;
+  margin-left: 4px;
+  font-weight: 700;
+}
+
+/* Hamburger menu button (mobile only) */
+.hamburger {
+  display: none;  /* hidden on desktop */
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: var(--purple);
+}
+
+
+/* ----------------------------------------------------------------
+   4. HERO SECTION
+   - Full-width banner at the top of the homepage
+---------------------------------------------------------------- */
+.hero {
+  text-align: center;
+  padding: 60px 20px 80px;
+  background: linear-gradient(
+    180deg,
+    rgba(204, 204, 255, 0) 0%,
+    rgba(184, 184, 255, 0.4) 100%
+  );
+}
+
+.hero-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* SVG bunny illustration */
+.hero-svg {
+  width: 200px;
+  margin: 0 auto 20px;
+  /* animation: float defined in keyframes below */
+  animation: float 3s ease-in-out infinite;
+  filter: drop-shadow(0 8px 15px rgba(124, 92, 187, 0.2));
+}
+
+.hero-title {
+  font-family: 'Nunito', sans-serif;
+  font-size: clamp(2rem, 5vw, 3rem);  /* clamp scales font size */
+  font-weight: 800;
+  color: var(--purple);
+  margin-bottom: 10px;
+  /* animation: fade-in from below */
+  animation: slideUp 0.8s ease forwards;
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-mid);
+  margin-bottom: 30px;
+  animation: slideUp 0.8s 0.2s ease forwards;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+
+/* ----------------------------------------------------------------
+   5. FILTER & SORT BAR
+---------------------------------------------------------------- */
+.filter-bar {
+  padding: 30px 20px 10px;
+  text-align: center;
+}
+
+.section-title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--purple);
+  margin-bottom: 6px;
+}
+
+.section-subtitle {
+  color: var(--text-mid);
+  margin-bottom: 20px;
+}
+
+/* Filter buttons row */
+.filters {
+  display: flex;
+  flex-wrap: wrap;   /* wrap to next line on small screens */
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+/* Individual filter button */
+.filter-btn {
+  background: white;
+  border: 2px solid var(--lavender);
+  border-radius: 20px;
+  padding: 8px 18px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-mid);
+  cursor: pointer;
+  transition: all var(--transition);  /* animate ALL properties */
+}
+
+/* Active / hover filter button */
+.filter-btn:hover,
+.filter-btn.active {
+  background: var(--purple);
+  color: white;
+  border-color: var(--purple);
+  /* CSS transform: slightly grow the button */
+  transform: scale(1.05);
+}
+
+/* Sort dropdown */
+.sort-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  color: var(--text-mid);
+  font-weight: 600;
+}
+
+.sort-bar select {
+  padding: 6px 12px;
+  border-radius: 10px;
+  border: 2px solid var(--lavender);
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.9rem;
+  background: white;
+  color: var(--text-dark);
+  cursor: pointer;
+}
+
+
+/* ----------------------------------------------------------------
+   6. PET CARDS GRID
+   - CSS Grid creates automatic responsive columns
+---------------------------------------------------------------- */
+.pets-grid {
+  display: grid;
+  /* auto-fill: as many columns as fit; minmax: min 240px, max equal */
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+  padding: 20px 30px 50px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Each pet card */
+.pet-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;       /* crop rounded corners */
+  cursor: pointer;
+  /* CSS position relative: so child absolute elements are inside */
+  position: relative;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+/* Hover effect: lift the card up */
+.pet-card:hover {
+  transform: translateY(-8px);  /* move 8px upward */
+  box-shadow: 0 12px 35px rgba(124, 92, 187, 0.25);
+}
+
+/* Hover info overlay - hidden by default, appears on hover */
+.card-hover-info {
+  position: absolute;   /* sits on top of card content */
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(124, 92, 187, 0.88);
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: var(--radius) var(--radius) 0 0;
+  /* Start invisible and off-screen above */
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: all var(--transition);  /* smooth slide in */
+  z-index: 2;
+}
+
+/* When card is hovered, show the info bar */
+.pet-card:hover .card-hover-info {
+  opacity: 1;
+  transform: translateY(0);  /* slide to original position */
+}
+
+/* The big emoji acting as pet image */
+.pet-emoji {
+  text-align: center;
+  font-size: 5rem;
+  padding: 30px 20px 10px;
+  background: linear-gradient(135deg, var(--periwinkle), var(--lavender));
+}
+
+/* Pet name, breed, price text area */
+.pet-info {
+  padding: 16px;
+  text-align: center;
+}
+
+.pet-name {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--purple);
+  margin-bottom: 4px;
+}
+
+.pet-breed {
+  font-size: 0.85rem;
+  color: var(--text-mid);
+  margin-bottom: 8px;
+}
+
+.pet-price {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ff4d6d;
+  margin-bottom: 12px;
+}
+
+/* "Add to Cart" button on each card */
+.btn-add {
+  background: var(--purple);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 20px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition);
+  width: 100%;
+}
+
+.btn-add:hover {
+  background: var(--purple-dark);
+  transform: scale(1.03);  /* slightly grow */
+}
+
+/* Hide filter results */
+.pet-card.hidden {
+  display: none;
+}
+
+
+/* ----------------------------------------------------------------
+   7. BREED COMPARISON TABLE
+---------------------------------------------------------------- */
+.table-section {
+  padding: 40px 20px;
+  text-align: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Wrapper allows horizontal scroll on small screens */
+.table-wrapper {
+  overflow-x: auto;
+  margin-top: 20px;
+  border-radius: var(--radius);
+  box-shadow: var(--card-shadow);
+}
+
+.breed-table {
+  width: 100%;
+  border-collapse: collapse;  /* merge cell borders */
+  background: white;
+  border-radius: var(--radius);
+  overflow: hidden;
+  font-size: 0.9rem;
+}
+
+/* Table header */
+.breed-table thead tr {
+  background: var(--purple);
+  color: white;
+}
+
+.breed-table th {
+  padding: 14px 16px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  text-align: left;
+}
+
+/* Table body cells */
+.breed-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--periwinkle);
+  color: var(--text-dark);
+}
+
+/* Alternate row colours (zebra striping) */
+.breed-table tbody tr:nth-child(even) {
+  background: #f8f7ff;
+}
+
+/* Hover row highlight */
+.breed-table tbody tr:hover {
+  background: var(--periwinkle);
+  transition: background var(--transition);
+}
+
+
+/* ----------------------------------------------------------------
+   8. PET DETAIL MODAL (POPUP)
+   - position: fixed covers whole screen
+   - display: none hides it; JS changes to flex to show
+---------------------------------------------------------------- */
+.modal-overlay {
+  display: none;               /* hidden by default */
+  position: fixed;             /* covers entire viewport */
+  inset: 0;                    /* shorthand for top/right/bottom/left: 0 */
+  background: rgba(60, 30, 100, 0.45);   /* dark tinted backdrop */
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* The white box in the middle */
+.modal-box {
+  background: white;
+  border-radius: var(--radius);
+  padding: 30px;
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;            /* scroll if content is tall */
+  position: relative;
+  /* animation: pop in from small */
+  animation: popIn 0.3s ease forwards;
+  text-align: center;
+}
+
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  background: var(--periwinkle);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 1rem;
+  cursor: pointer;
+  color: var(--purple);
+  font-weight: 700;
+  transition: all var(--transition);
+}
+.modal-close:hover {
+  background: var(--purple);
+  color: white;
+  transform: rotate(90deg);  /* spin the X on hover */
+}
+
+.modal-emoji {
+  font-size: 5rem;
+  margin-bottom: 10px;
+}
+
+.modal-box h2 {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.5rem;
+  color: var(--purple);
+  margin-bottom: 8px;
+}
+
+.modal-tag {
+  display: inline-block;
+  background: var(--periwinkle);
+  color: var(--purple);
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+/* Stat chips row */
+.modal-grid {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.modal-stat {
+  background: #f8f7ff;
+  border-radius: 12px;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.85rem;
+  min-width: 110px;
+}
+
+.modal-stat strong {
+  font-size: 0.8rem;
+  color: var(--text-mid);
+}
+
+/* Info sections inside modal */
+.modal-section {
+  text-align: left;
+  margin-bottom: 14px;
+  padding: 12px 14px;
+  background: #fafaf8;
+  border-radius: var(--radius-sm);
+  border-left: 4px solid var(--lavender);
+}
+
+.modal-section h4 {
+  font-size: 0.9rem;
+  color: var(--purple);
+  margin-bottom: 4px;
+}
+
+.modal-section p {
+  font-size: 0.88rem;
+  color: var(--text-dark);
+}
+
+
+/* ----------------------------------------------------------------
+   9. CART POPUP (slide-in from right)
+---------------------------------------------------------------- */
+.cart-popup {
+  position: fixed;
+  right: 20px;
+  top: 80px;
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: 0 8px 30px rgba(124, 92, 187, 0.25);
+  width: 300px;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 20px;
+  z-index: 1500;
+  display: none;              /* JS shows/hides this */
+  animation: slideInRight 0.3s ease;
+}
+
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--periwinkle);
+}
+
+.cart-header h3 {
+  font-family: 'Nunito', sans-serif;
+  color: var(--purple);
+}
+
+.cart-header button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--text-mid);
+}
+
+#cart-items-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--periwinkle);
+  font-size: 0.9rem;
+}
+
+.cart-total {
+  text-align: right;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--purple);
+  margin-top: 12px;
+}
+
+
+/* ----------------------------------------------------------------
+   10. ACCESSORIES PAGE specific styles are same as pets-grid
+    (uses same .pets-grid and .pet-card classes)
+---------------------------------------------------------------- */
+
+
+/* ----------------------------------------------------------------
+   11. VIDEO CARDS (Care page)
+---------------------------------------------------------------- */
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  padding: 20px 30px 50px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.video-card {
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  transition: transform var(--transition);
+}
+.video-card:hover {
+  transform: translateY(-5px);
+}
+
+/* 16:9 aspect ratio wrapper for video */
+.video-wrapper {
+  position: relative;
+  padding-top: 56.25%;  /* 9/16 = 56.25% */
+}
+
+/* The iframe fills the wrapper completely */
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.video-info {
+  padding: 16px;
+}
+
+.video-info h3 {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  color: var(--purple);
+  margin-bottom: 6px;
+}
+
+.video-info p {
+  font-size: 0.85rem;
+  color: var(--text-mid);
+  margin-bottom: 10px;
+}
+
+.video-tag {
+  background: var(--periwinkle);
+  color: var(--purple);
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Hidden video cards */
+.video-card.hidden {
+  display: none;
+}
+
+
+/* ----------------------------------------------------------------
+   12. TIPS SECTION (Care page)
+---------------------------------------------------------------- */
+.tips-section {
+  padding: 40px 30px;
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.tip-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 24px 16px;
+  box-shadow: var(--card-shadow);
+  transition: transform var(--transition);
+}
+.tip-card:hover {
+  transform: translateY(-5px);
+}
+
+.tip-icon {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+}
+
+.tip-card h4 {
+  font-family: 'Nunito', sans-serif;
+  color: var(--purple);
+  margin-bottom: 8px;
+}
+
+.tip-card p {
+  font-size: 0.85rem;
+  color: var(--text-mid);
+}
+
+
+/* ----------------------------------------------------------------
+   13. CONTACT FORM PAGE
+---------------------------------------------------------------- */
+.contact-section {
+  display: grid;
+  /* Two equal columns on desktop */
+  grid-template-columns: 1fr 1.6fr;
+  gap: 30px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+/* Info cards on the left */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.info-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.info-icon {
+  font-size: 1.8rem;
+}
+
+.info-card h4 {
+  font-family: 'Nunito', sans-serif;
+  color: var(--purple);
+  margin-bottom: 4px;
+}
+
+.info-card p, .info-card a {
+  font-size: 0.9rem;
+  color: var(--text-mid);
+}
+
+/* Small hours table inside info card */
+.hours-table {
+  font-size: 0.85rem;
+  width: 100%;
+}
+.hours-table td {
+  padding: 2px 8px 2px 0;
+}
+
+/* Form container on the right */
+.form-container {
+  background: white;
+  border-radius: var(--radius);
+  padding: 30px;
+  box-shadow: var(--card-shadow);
+}
+
+.form-container h2 {
+  font-family: 'Nunito', sans-serif;
+  color: var(--purple);
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+}
+
+/* Section title inside form */
+.form-section-title {
+  font-weight: 700;
+  color: var(--purple);
+  font-size: 1rem;
+  margin: 20px 0 12px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--periwinkle);
+}
+
+/* Form group: label + input */
+.form-group {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+/* Red asterisk for required fields */
+.required {
+  color: #ff4d6d;
+}
+
+/* Input, select, textarea styles */
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group input[type="number"],
+.form-group select,
+.form-group textarea {
+  padding: 10px 14px;
+  border: 2px solid var(--lavender);
+  border-radius: var(--radius-sm);
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  background: #fafaf8;
+  transition: border-color var(--transition);
+  width: 100%;
+}
+
+/* Focused input: highlight border */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--purple);
+  background: white;
+}
+
+/* Input with an error */
+.form-group input.error-field,
+.form-group select.error-field,
+.form-group textarea.error-field {
+  border-color: #ff4d6d;
+}
+
+/* Error message text */
+.error-msg {
+  font-size: 0.8rem;
+  color: #ff4d6d;
+  font-weight: 600;
+  display: none;  /* hidden; JS shows with .show class */
+}
+.error-msg.show {
+  display: block;
+}
+
+/* Radio button group */
+.radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-mid);
+  background: #f8f7ff;
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 2px solid var(--lavender);
+  transition: all var(--transition);
+}
+.radio-label:hover {
+  border-color: var(--purple);
+  background: var(--periwinkle);
+}
+
+/* Checkbox */
+.checkbox-group {
+  flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: var(--text-mid);
+  cursor: pointer;
+}
+
+/* Submit button */
+.btn-submit {
+  width: 100%;
+  padding: 14px;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+/* Success message */
+.success-message {
+  text-align: center;
+  padding: 40px;
+  animation: popIn 0.4s ease;
+}
+
+.success-icon {
+  font-size: 4rem;
+  margin-bottom: 16px;
+  animation: bounce 1s ease 0.3s;
+}
+
+.success-message h3 {
+  font-family: 'Nunito', sans-serif;
+  color: var(--purple);
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.success-message p {
+  color: var(--text-mid);
+  margin-bottom: 20px;
+}
+
+
+/* ----------------------------------------------------------------
+   14. PAGE HEADER (for non-home pages)
+---------------------------------------------------------------- */
+.page-header {
+  text-align: center;
+  padding: 50px 20px 30px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.5), transparent);
+}
+
+.page-header h1 {
+  font-family: 'Nunito', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 800;
+  color: var(--purple);
+  margin-bottom: 8px;
+}
+
+.page-header p {
+  color: var(--text-mid);
+  font-size: 1.1rem;
+}
+
+
+/* ----------------------------------------------------------------
+   15. PRIMARY BUTTON (reused everywhere)
+---------------------------------------------------------------- */
+.btn-primary {
+  display: inline-block;
+  background: var(--purple);
+  color: white;
+  border: none;
+  border-radius: 24px;
+  padding: 12px 28px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  /* multiple transitions */
+  transition: background var(--transition), transform var(--transition),
+              box-shadow var(--transition);
+  box-shadow: 0 4px 14px rgba(124, 92, 187, 0.35);
+}
+
+.btn-primary:hover {
+  background: var(--purple-dark);
+  transform: translateY(-3px) scale(1.04);  /* lift + grow */
+  box-shadow: 0 8px 22px rgba(124, 92, 187, 0.45);
+}
+
+.btn-primary:active {
+  transform: scale(0.97);  /* press effect */
+}
+
+
+/* ----------------------------------------------------------------
+   16. FOOTER
+---------------------------------------------------------------- */
+.footer {
+  background: var(--purple);
+  color: black;
+  padding: 40px 30px 20px;
+  margin-top: 40px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto 24px;
+}
+
+.footer h4 {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: black;
+}
+
+.footer p, .footer li {
+  font-size: 0.88rem;
+  color: black;
+  margin-bottom: 4px;
+}
+
+.footer ul li {
+  margin-bottom: 6px;
+}
+
+.footer ul li a:hover {
+  text-decoration: underline;
+  color: rgb(0, 0, 0);
+}
+
+.footer-copy {
+  text-align: center;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.6);
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.2);
+}
+
+
+/* ----------------------------------------------------------------
+   17. KEYFRAME ANIMATIONS
+   - @keyframes defines animation steps
+   - Used with animation: property above
+---------------------------------------------------------------- */
+
+/* Floating up-down (used on hero SVG) */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-12px); }
+}
+
+/* Gentle wobble (used on logo paw icon) */
+@keyframes wobble {
+  0%, 100% { transform: rotate(0deg); }
+  25%       { transform: rotate(10deg); }
+  75%       { transform: rotate(-10deg); }
+}
+
+/* Slide up from below (used on hero text) */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Scale from nothing (modal popup) */
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Slide in from right (cart) */
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Bounce (success icon) */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  40%       { transform: translateY(-20px); }
+  60%       { transform: translateY(-10px); }
+}
+
+
+/* ----------------------------------------------------------------
+   18. RESPONSIVE STYLES (MOBILE)
+   - @media queries apply styles only at certain screen widths
+   - max-width: 768px targets tablets and phones
+---------------------------------------------------------------- */
+@media (max-width: 768px) {
+
+  /* Show hamburger, hide links by default */
+  .hamburger {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;           /* hidden until menu opened */
+    flex-direction: column;  /* stack vertically */
+    position: absolute;
+    top: 65px;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 16px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    z-index: 999;
+  }
+
+  /* JavaScript adds this class to show the menu */
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-links li {
+    width: 100%;
+  }
+
+  .nav-links li a {
+    display: block;
+    padding: 12px 16px;
+  }
+
+  /* Single column grid on mobile */
+  .pets-grid {
+    grid-template-columns: 1fr 1fr;
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .contact-section {
+    grid-template-columns: 1fr;  /* stack on mobile */
+  }
+
+  .hero-title {
+    font-size: 1.8rem;
+  }
+
+  .cart-popup {
+    right: 10px;
+    width: calc(100vw - 20px);
+  }
+}
+
+/* Very small screens: one column */
+@media (max-width: 400px) {
+  .pets-grid {
+    grid-template-columns: 1fr;
+  }
+}

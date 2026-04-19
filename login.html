@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Pawfect Pets Login</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:linear-gradient(135deg,#fbc2eb,#a6c1ee);
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.container{
+background:white;
+padding:30px;
+width:300px;
+border-radius:10px;
+box-shadow:0 10px 20px rgba(0,0,0,0.2);
+text-align:center;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:10px 0;
+border-radius:5px;
+border:1px solid #ccc;
+}
+
+button{
+width:100%;
+padding:10px;
+background:#7c5cbb;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+button:hover{
+background:#5e3f9c;
+}
+
+#error{
+color:red;
+font-size:14px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>🐾 Login</h2>
+
+<p id="error"></p>
+
+<input type="text" id="username" placeholder="Enter username">
+
+<input type="password" id="password" placeholder="Enter password">
+
+<button onclick="login()">Login</button>
+
+<br><br>
+
+<a href="signup.html">Create Account</a>
+
+</div>
+
+<script>
+
+function login(){
+
+var username=document.getElementById("username").value;
+var password=document.getElementById("password").value;
+
+var storedUser=localStorage.getItem("username");
+var storedPass=localStorage.getItem("password");
+
+if(username==storedUser && password==storedPass){
+
+localStorage.setItem("loggedIn","true");
+
+alert("Login Successful!");
+
+window.location.href="index.html";
+
+}
+
+else{
+document.getElementById("error").innerHTML="Invalid username or password";
+}
+
+}
+
+</script>
+
+</body>
+</html>

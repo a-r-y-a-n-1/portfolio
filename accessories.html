@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🛒 Accessories – Pawfect Pets</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAVIGATION (same on every page) -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">
+      <span class="logo-icon">🐾</span>
+      <span class="logo-text">Pawfect Pets</span>
+    </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open menu">☰</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">🏠 Home</a></li>
+      <li><a href="accessories.html" class="active">🛒 Accessories</a></li>
+      <li><a href="care.html">📺 Care Videos</a></li>
+      <li><a href="contact.html">✉️ Contact</a></li>
+      <li><a href="#" class="cart-btn" onclick="showCart()">🛒 Cart <span class="cart-badge" id="cart-count">0</span></a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <h1>🛒 Pet Accessories Shop</h1>
+    <p>Everything your pet needs to live their best life!</p>
+  </div>
+
+  <!-- ACCESSORY CATEGORY TABS -->
+  <section class="filter-bar">
+    <div class="filters">
+      <button class="filter-btn active" onclick="filterAcc('all', this)">All Items</button>
+      <button class="filter-btn" onclick="filterAcc('food', this)">🌾 Food & Hay</button>
+      <button class="filter-btn" onclick="filterAcc('toy', this)">🎾 Toys</button>
+      <button class="filter-btn" onclick="filterAcc('housing', this)">🏠 Housing</button>
+      <button class="filter-btn" onclick="filterAcc('grooming', this)">✂️ Grooming</button>
+    </div>
+  </section>
+
+  <!-- ACCESSORIES GRID -->
+  <section class="pets-grid" id="acc-container">
+
+    <!-- FOOD & HAY -->
+    <div class="pet-card" data-type="food">
+      <div class="card-hover-info">🌾 Timothy hay – the best!</div>
+      <div class="pet-emoji">🌾</div>
+      <div class="pet-info">
+        <h3 class="pet-name">Timothy Hay 1kg</h3>
+        <p class="pet-breed">For: Rabbits & Guinea Pigs</p>
+        <p class="pet-price">₹200</p>
+        <button class="btn-add" onclick="addToCart('Timothy Hay 1kg', 200)">Add to Cart 🛒</button>
+      </div>
+    </div>
+
+    <div class="pet-card" data-type="food">
+      <div class="card-hover-info">🥕 Fresh & crunchy!</div>
+      <div class="pet-emoji">🥕</div>
+      <div class="pet-info">
+        <h3 class="pet-name">Veggie Mix 500g</h3>
+        <p class="pet-breed">For: All small pets</p>
+        <p class="pet-price">₹50</p>
+        <button class="btn-add" onclick="addToCart('Veggie Mix', 50)">Add to Cart 🛒</button>
+      </div>
+    </div>
+
+    <div class="pet-card" data-type="food">
+      <div class="card-hover-info">🌀 Hamster's favourite!</div>
+      <div class="pet-emoji">🌰</div>
+      <div class="pet-info">
+        <h3 class="pet-name">Hamster Seed Mix</h3>
+        <p class="pet-breed">For: Hamsters</p>
+        <p class="pet-price">₹100</p>
+        <button class="btn-add" onclick="addToCart('Hamster Seed Mix', 100)">Add to Cart 🛒</button>
+      </div>
+    </div>
+
+    <!-- TOYS -->
+    <div class="pet-card" data-type="toy">
+      <div class="card-hover-info">🎾 Squeaky squeaky!</div>
+      <div class="pet-emoji">🎾</div>
+      <div class="pet-info">
+        <h3 class="pet-name">Squeaky Ball</h3>
+        <p class="pet-breed">For: Cats & small dogs</p>
+        <p class="pet-price">₹100</p>
+        <button class="btn-add" onclick="addToCart('Squeaky Ball', 100)">Add to Cart 🛒</button>
+      </div>
+    </div>
+
+    <div class="pet-card" data-type="toy">
+      <div class="card-hover-info">🔴 Cats go crazy for this!</div>
+      <div class="pet-emoji">🔴</div>
+      <div class="pet-info">
+        <h3 class="pet-name">Laser Pointer Toy</h3>
+        <p class="pet-breed">For: Cats</p>
+        <p class="pet-price">₹300</p>
+        <button class="btn-add" onclick="addToCart('Laser Pointer', 300)">Add to Cart 🛒</button>
+      </div>
+    </div>
+
+    <div class="pet-card" data-type="toy">
+      <div class="card-hover-info">🪵 Keeps teeth healthy!</div>
+      <div class="pet-emoji">🪵</div>
+      <div class="pet-info">
+        <h3 class="pet-name">Chew Sticks Pack</h3>
+        <p class="pet-breed">For: Rabbits & Guinea Pigs</p>
+        <p class="pet-price">₹200</p>
+        <button class="btn-add" onclick="addToCart('Chew Sticks', 200)">Add to Cart 🛒</button>
+      </div>
+    </div>
+
+    <div class="pet-card" data-type="toy">
+      <div class="card-hover-info">🔔 Jingle jingle fun!</div>
+      <div class="pet-emoji">🔔</div>
+      <div class="pet-info">
+        <h3 class="pet-name">Bell Toy Set</h3>
+        <p class="pet-breed">For: All small pets</p>
+        <p class="pet-price">₹100</p>
+        <button class="btn-add" onclick="addToCart('Bell Toy Set', 100)">Add to Cart 🛒</button>
+      </div>
+    </div>
+
+    <!-- HOUSING -->
+    <div class="pet-card" data-type="housing">
+      <div class="card-hover-info">🏠 Cosy home sweet home!</div>
+      <div class="pet-emoji">🏠</div>
+      <div class="pet-info">
+        <h3 class="pet-name">Large Rabbit Hutch</h3>
+        <p class="pet-breed">For: Rabbits</p>
+        <p class="pet-price">₹1200</p>
+        <button class="btn-add" onclick="addToCart('Rabbit Hutch', 1200)">Add to Cart 🛒</button>
+      </div>
+    </div>
+
+    <div class="pet-card" data-type="housing">
+      <div class="card-hover-info">🚧 Keep them safe & sound!</div>
+      <div class="pet-emoji">🚧</div>
+      <div class="pet-info">
+        <h3 class="pet-name">Pet Playpen Fence</h3>
+        <p class="pet-breed">For: All small pets</p>
+        <p class="pet-price">₹500</p>
+        <button class="btn-add" onclick="addToCart('Playpen Fence', 500)">Add to Cart 🛒</button>
+      </div>
+    </div>
+
+    <div class="pet-card" data-type="housing">
+      <div class="card-hover-info">🕳️ Hide & seek champion!</div>
+      <div class="pet-emoji">🌀</div>
+      <div class="pet-info">
+        <h3 class="pet-name">Hideaway Tunnel</h3>
+        <p class="pet-breed">For: Guinea Pigs & Rabbits</p>
+        <p class="pet-price">₹500</p>
+        <button class="btn-add" onclick="addToCart('Hideaway Tunnel', 500)">Add to Cart 🛒</button>
+      </div>
+    </div>
+
+    <!-- GROOMING -->
+    <div class="pet-card" data-type="grooming">
+      <div class="card-hover-info">✂️ Snip snip – look sharp!</div>
+      <div class="pet-emoji">✂️</div>
+      <div class="pet-info">
+        <h3 class="pet-name">Nail Clippers</h3>
+        <p class="pet-breed">For: All small pets</p>
+        <p class="pet-price">₹200</p>
+        <button class="btn-add" onclick="addToCart('Nail Clippers', 200)">Add to Cart 🛒</button>
+      </div>
+    </div>
+
+    <div class="pet-card" data-type="grooming">
+      <div class="card-hover-info">🖌️ Soft & gentle brushing!</div>
+      <div class="pet-emoji">🖌️</div>
+      <div class="pet-info">
+        <h3 class="pet-name">Soft Grooming Brush</h3>
+        <p class="pet-breed">For: Cats & Rabbits</p>
+        <p class="pet-price">₹300</p>
+        <button class="btn-add" onclick="addToCart('Grooming Brush', 300)">Add to Cart 🛒</button>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- CART POPUP -->
+  <div class="cart-popup" id="cart-popup">
+    <div class="cart-header">
+      <h3>🛒 Your Cart</h3>
+      <button onclick="hideCart()">✕</button>
+    </div>
+    <ul id="cart-items-list"></ul>
+    <div class="cart-total">Total: ₹<span id="cart-total">0</span></div>
+    <a href="contact.html" class="btn-primary" style="display:block;text-align:center;margin-top:10px;">Checkout ➡️</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <h4>🐾 Pawfect Pets</h4>
+        <p>Bringing you the cutest pets since 2024!</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="accessories.html">Accessories</a></li>
+          <li><a href="care.html">Care Videos</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>📍 Visit Us</h4>
+        <p>123 Bunny Lane<br>Chennai, India</p>
+      </div>
+    </div>
+    <p class="footer-copy">© 2026 Pawfect Pets – Made with 💜 for animal lovers</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
